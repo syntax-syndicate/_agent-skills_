@@ -9,11 +9,14 @@ set -euo pipefail
 # Re-run after a `git pull` (or after scripts/sync-matt-skills.sh) to refresh.
 
 REPO="$(cd "$(dirname "$0")/.." && pwd)"
-DEST="$HOME/.dotfiles/home/.agents/skills"
+DEST="${SKILLS_DEST:-$HOME/.dotfiles/home/.agents/skills}"
 
 mkdir -p "$DEST"
 
-while IFS= read -r -d '' skill_md; do
+installed=0
+for skill_md in "$REPO"/*/SKILL.md; do
+  [[ -f "$skill_md" ]] || continue
+
   src="$(dirname "$skill_md")"
   name="$(basename "$src")"
   target="$DEST/$name"
@@ -22,8 +25,10 @@ while IFS= read -r -d '' skill_md; do
   cp -R "$src" "$target"
   rm -rf "$target/.git"
   echo "installed $name -> $target"
-done < <(find "$REPO" \
-  -name SKILL.md \
-  -not -path '*/node_modules/*' \
-  -not -path '*/.git/*' \
-  -print0)
+  ((installed += 1))
+done
+
+if ((installed == 0)); then
+  echo "No skills found in $REPO" >&2
+  exit 1
+fi

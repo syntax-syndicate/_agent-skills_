@@ -4,8 +4,7 @@ Personal coding-agent skills for TypeScript software design, review, refactoring
 
 These skills are designed to work together:
 
-- `coding-standards/` — the shared standards package. Model-invoked. Defines the user's TypeScript design taste, vocabulary, non-negotiables, and topic references.
-- `code-review/` — user-invoked standards-backed review workflow. Selects a review target, loads relevant standards, requires evidence for findings, and stays review-only.
+- `coding-standards/` — the model-invoked, single-file source of truth for the user's TypeScript design taste.
 - `tech-spec/` — user-invoked typed call-stack architecture handoff workflow. Produces code-shaped specs with alternatives, interfaces, seams, adapters, call stacks, and an RGR TDD plan.
 - `improve-codebase-architecture/` — user-invoked architecture scan workflow. Finds standards-backed refactor opportunities and prepares focused briefs for `tech-spec`.
 
@@ -15,6 +14,8 @@ These skills are vendored from [mattpocock/skills](https://github.com/mattpocock
 
 - `grilling/` — model-invoked relentless interview loop.
 - `grill-me/` — user-invoked grilling session.
+- `code-review/` — model-invoked two-axis standards and spec review workflow.
+- `domain-modeling/` — model-invoked glossary and architectural-decision workflow.
 - `grill-with-docs/` — user-invoked grilling session that also builds docs (ADRs, glossary).
 - `tdd/` — model-invoked red-green-refactor test-driven development.
 
