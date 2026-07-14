@@ -1,22 +1,25 @@
 # Skills
 
-Personal coding-agent skills for TypeScript software design, review, refactoring, and implementation workflows.
+Personal coding-agent skills for TypeScript engineering, architecture, Cloudflare composition, and agent workflows.
 
-These skills are designed to work together:
+## Included skills
 
-- `coding-standards/` — the model-invoked, single-file source of truth for the user's TypeScript design taste.
-- `tech-spec/` — user-invoked typed call-stack architecture handoff workflow. Produces code-shaped specs with alternatives, interfaces, seams, adapters, call stacks, and an RGR TDD plan.
-- `improve-codebase-architecture/` — user-invoked architecture scan workflow. Finds standards-backed refactor opportunities and prepares focused briefs for `tech-spec`.
+- `coding-standards/` — model-invoked, correct-by-construction TypeScript standards covering typed failures, boundary parsing, domain modeling, modules and adapters, workflows, testing, and TypeScript safety. Includes a reusable `prelude.ts` template for result helpers, exhaustive handling, defect helpers, and redacted values.
+- `cloudflare-composition-root/` — model-invoked guidance for keeping Cloudflare bindings and runtime types at Hono and Worker composition roots. Includes concrete Hono, `WorkerEntrypoint`, adapter, and refactor examples in `EXAMPLES.md`.
+- `tech-spec/` — user-invoked, design-only workflow for producing typed call-stack architecture handoffs with alternatives, contracts, seams, data flows, file changes, and an RGR TDD plan.
+- `herdr/` — model-invoked instructions for managing herdr workspaces, tabs, panes, sibling agents, servers, output, and wait conditions. Applies only inside a herdr-managed pane (`HERDR_ENV=1`).
+- `bro/` — user-invoked request to restate the previous response plainly and concisely.
+
+Each skill uses `SKILL.md` as its entrypoint. Supporting templates and examples are colocated with the skill that owns them.
 
 ### Vendored from Matt Pocock
 
-These skills are vendored from [mattpocock/skills](https://github.com/mattpocock/skills) so our workflows are self-contained for consumers (e.g. `tech-spec` and `improve-codebase-architecture` route into the grilling skills). Do not edit them by hand; re-sync instead.
+These skills are vendored from [mattpocock/skills](https://github.com/mattpocock/skills) so the collection is self-contained. Do not edit them by hand; re-sync instead.
 
 - `grilling/` — model-invoked relentless interview loop.
 - `grill-me/` — user-invoked grilling session.
-- `code-review/` — model-invoked two-axis standards and spec review workflow.
 - `domain-modeling/` — model-invoked glossary and architectural-decision workflow.
-- `grill-with-docs/` — user-invoked grilling session that also builds docs (ADRs, glossary).
+- `grill-with-docs/` — user-invoked grilling session that also builds docs such as ADRs and a glossary.
 - `tdd/` — model-invoked red-green-refactor test-driven development.
 
 Resync with:
@@ -28,10 +31,11 @@ MATT_SKILLS_REF=<sha|tag|branch> scripts/sync-matt-skills.sh
 
 ## Design principles
 
-- Keep standards in one place: `coding-standards/` owns the substantive rules.
-- Keep workflow skills thin: review, spec, and architecture skills route to the standards instead of duplicating them.
-- Prefer typed contracts, call stacks, interfaces, seams, and concrete evidence over vague architecture prose.
-- Treat user-invoked workflows as deliberate modes; do not surprise-run heavy reviews/specs/refactors.
+- Prefer correct-by-construction APIs, explicit dependencies, typed failures, and parsed boundary values.
+- Keep domain and application code independent of frameworks, protocols, vendors, and runtime bindings.
+- Prefer deep, cohesive modules and real test seams over pass-through abstractions, module mocks, and spies.
+- Use code-shaped contracts, call stacks, and concrete evidence when design precision matters.
+- Keep deliberate workflows user-invoked.
 
 ## Credits
 

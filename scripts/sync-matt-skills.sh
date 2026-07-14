@@ -29,7 +29,6 @@ UPSTREAM_REF="${MATT_SKILLS_REF:-main}"
 SKILLS=(
   "productivity/grill-me"
   "productivity/grilling"
-  "engineering/code-review"
   "engineering/domain-modeling"
   "engineering/grill-with-docs"
   "engineering/tdd"
