@@ -4,10 +4,6 @@ description: Correct-by-construction TypeScript standards. Use for TypeScript en
 ---
 These standards describe how to design and write TypeScript code in this codebase. They are especially intended for agents: inspect existing code before adding patterns, libraries, Adapters, or abstractions, but apply these standards to all new and refactored behavior. Follow existing conventions only when they are compatible with these standards.
 
-## Bundled prelude template
-
-This skill includes a reusable [`prelude.ts`](prelude.ts) beside this file. Before creating a TypeScript prelude from scratch, read that template and copy it into the target project as the starting point. Follow its embedded agent instructions to choose Effect, `better-result`, or the commented local `Result` fallback, and remove helpers the target project does not need.
-
 ## Decision priority
 
 When rules pull in different directions, use this order:
@@ -93,7 +89,7 @@ Throw or panic only when a defect makes correct execution impossible, not merely
 
 Known configuration failures are values; the composition root reports them safely and terminates startup.
 
-Use shared helpers from `prelude.ts` where available, or the established panic helper from the project's result library:
+Use established shared defect helpers where available, or the panic helper from the project's result library:
 
 ```ts
 export function casesHandled(unexpectedCase: never): never;
@@ -159,7 +155,7 @@ Tracing/logging should make failures diagnosable with safe fields:
 
 Do not put secrets in errors, traces, logs, or snapshots.
 
-Use a `Redacted<T>` wrapper for sensitive values such as tokens, API keys, passwords, raw credentials, and secrets. Prefer Effect's `Redacted.Redacted` in Effect codebases or a local `Redacted<T>` in `prelude.ts`.
+Use a `Redacted<T>` wrapper for sensitive values such as tokens, API keys, passwords, raw credentials, and secrets. Prefer Effect's `Redacted.Redacted` in Effect codebases or a local shared `Redacted<T>` wrapper.
 
 Wrap sensitive values at the boundary and unwrap only where the raw value is needed, usually inside an adapter making an external call.
 
@@ -602,10 +598,9 @@ import * as EmailAddress from "./email-address";
 EmailAddress.parse(input);
 ```
 
-Use named imports for classes, prelude helpers, and focused shared helpers:
+Use named imports for classes and focused shared helpers:
 
 ```ts
-import { casesHandled } from "./prelude";
 import { PasswordReset } from "./password-reset";
 ```
 
@@ -631,10 +626,9 @@ email-address.ts
 billing-period.ts
 string-case.ts
 array.ts
-prelude.ts
 ```
 
-`prelude.ts` is allowed for tiny ubiquitous generic helpers/types such as:
+Tiny ubiquitous generic helpers/types may share one explicit module when no more precise owner exists. Appropriate contents include:
 
 - `casesHandled`
 - `shouldNeverHappen`
@@ -644,17 +638,7 @@ prelude.ts
 - common `Result` helpers when the project uses neither Effect nor `better-result`
 - broad type utilities
 
-A reusable template is bundled with this skill at [`prelude.ts`](prelude.ts). Its local `Result` implementation is intentionally commented out. Before copying the template into a project, inspect the project's dependencies and error model:
-
-1. If the project uses Effect, delete the commented local `Result` code and use Effect.
-2. If the project uses `better-result`, delete the commented local `Result` code and use `better-result`.
-3. If the project uses neither, ask the user whether they want to install and use `better-result`.
-   - If yes, install it and delete the commented local `Result` code.
-   - If no, uncomment the local `Result` types and helpers.
-
-Never enable the local `Result` implementation alongside Effect or `better-result`. Keep only helpers justified by the target project; do not copy unused abstractions merely because the template provides them.
-
-Do not put domain/application policy in `prelude.ts`.
+Keep only helpers justified by the target project. Keep domain and application policy with their owning modules.
 
 No arbitrary file-size limits. Prefer cohesion and discoverability over small files for their own sake. Split when a file has multiple unrelated reasons to change or callers must understand unrelated concepts.
 

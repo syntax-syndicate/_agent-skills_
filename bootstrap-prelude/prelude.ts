@@ -1,16 +1,5 @@
-// AGENT INSTRUCTIONS FOR COPYING THIS TEMPLATE:
-// 1. Inspect the target project's dependencies and established error model first.
-// 2. If the project uses Effect, use Effect's result/error facilities and delete the
-//    commented local Result section below.
-// 3. If the project uses better-result, use better-result and delete the commented
-//    local Result section below.
-// 4. If the project uses neither Effect nor better-result, ask the user whether they
-//    want to install and use better-result.
-//    - If yes, install better-result and delete the commented local Result section.
-//    - If no, uncomment the local Result section.
-// 5. Never uncomment the local Result section alongside Effect or better-result.
-
-// LOCAL RESULT FALLBACK — follow the agent instructions above before using.
+// LOCAL RESULT FALLBACK — enable only when the project uses neither Effect nor
+// better-result, as directed by the bootstrap-prelude skill.
 //
 // /** The result of an operation that can fail with an expected error. */
 // export type Result<T, E extends Error> =
