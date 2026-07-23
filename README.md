@@ -7,6 +7,7 @@ Personal coding-agent skills for TypeScript engineering, architecture, Cloudflar
 - `coding-standards/` — model-invoked, correct-by-construction TypeScript standards covering typed failures, boundary parsing, domain modeling, modules and adapters, workflows, testing, and TypeScript safety.
 - `bootstrap-prelude/` — model-invoked workflow for bootstrapping a TypeScript `prelude.ts` from the bundled foundation and ambient generic helpers and types discovered across the target repository.
 - `cloudflare-composition-root/` — model-invoked guidance for keeping Cloudflare bindings and runtime types at Hono and Worker composition roots. Includes concrete Hono, `WorkerEntrypoint`, adapter, and refactor examples in `EXAMPLES.md`.
+- `effect-service-design/` — model-invoked guidance for designing new Effect service modules and auditing existing codebases for service, Layer, and composition improvements.
 - `tech-spec/` — user-invoked, design-only workflow for producing typed call-stack architecture handoffs with alternatives, contracts, seams, data flows, file changes, and an RGR TDD plan.
 - `herdr/` — model-invoked instructions for managing herdr workspaces, tabs, panes, sibling agents, servers, output, and wait conditions. Applies only inside a herdr-managed pane (`HERDR_ENV=1`).
 - `bro/` — user-invoked request to restate the previous response plainly and concisely.
